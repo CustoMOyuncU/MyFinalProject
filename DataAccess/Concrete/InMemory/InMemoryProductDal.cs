@@ -47,7 +47,7 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public List<Product> GetAllByCategory(int categoryId)
+        public List<Product> GetCarsByBrandId(int categoryId)
         {
             return _products.Where(p => p.CategoryId == categoryId).ToList();
         }

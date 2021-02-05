@@ -18,6 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
+                Console.WriteLine("EKLENDİ");
             }
         }
 
