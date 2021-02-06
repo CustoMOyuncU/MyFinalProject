@@ -1,9 +1,9 @@
-﻿using Entities.Abstract;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
     // Class = Referans tip
     public interface IEntityRepository<T> where T:class,IEntity,new()
