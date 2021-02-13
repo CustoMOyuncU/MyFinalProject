@@ -12,10 +12,10 @@ namespace ConsoleUI
         {
             ProductTest();
 
-            //CategoryTest();
 
+            //CategoryTest();
         }
-            
+
         private static void CategoryTest()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
@@ -28,7 +28,7 @@ namespace ConsoleUI
         private static void ProductTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
-
+            
             var result = productManager.GetProductDetails();
 
             if (result.Succes==true)
