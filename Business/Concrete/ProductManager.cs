@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Business;
 using Business.BusinsessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -47,6 +48,7 @@ namespace Business.Concrete
 
         }
 
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             //İş kodları
@@ -57,6 +59,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id), Messages.ProductAdded);
@@ -83,9 +86,9 @@ namespace Business.Concrete
             var result = _productDal.GetAll(n => n.ProductName == productName).Any();
             if (result)
             {
-                return new SuccessResult(Messages.ProductNameAlreadyExists);
+                return new ErrorResult(Messages.ProductNameAlreadyExists);
             }
-            return new ErrorResult();
+            return new SuccessResult();
         }
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
@@ -104,6 +107,18 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.CategoryLimitExceded);
             }
             return new SuccessResult();
+        }
+        [CacheRemoveAspect("IProductService.Get")]
+        public IResult Update(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdated);
+        }
+
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
         }
     }
 }

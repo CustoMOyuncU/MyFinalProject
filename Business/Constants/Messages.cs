@@ -24,5 +24,7 @@ namespace Business.Constants
         public static string SuccessfulLogin="Giriş başarılı";
         public static string UserAlreadyExists="Kullanıcı mebcut";
         public static string AccessTokenCreated="jwt Created";
+        internal static string ProductUpdated;
+        internal static string ProductDeleted;
     }
 }
